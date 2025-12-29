@@ -1879,7 +1879,9 @@
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 22px;
             margin-top: 30px;
-            align-items: start;
+            align-items: stretch;
+            /* сделать строки одинаковой высоты (авто-растяжение карточек) */
+            grid-auto-rows: 1fr;
         }
 
         .place-card {
@@ -1892,17 +1894,20 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            /* растягиваем карточку по высоте ряда */
+            height: 100%;
         }
 
         /* Новая раскладка: одна крупная фотография + полоска миниатюр */
         .place-photos {
             display: block;
             width: 100%;
+            margin-bottom: 8px;
         }
 
         .place-photos .main-photo {
             width: 100%;
-            height: 180px;
+            aspect-ratio: 16 / 11;
             object-fit: cover;
             border-radius: 8px;
             display: block;
@@ -1945,6 +1950,9 @@
             font-size: 1.05rem;
             margin: 6px 0 4px;
             color: var(--primary-color);
+            /* фиксированная высота заголовка */
+            height: 44px;
+            overflow: hidden;
         }
 
         .place-card p {
@@ -1952,10 +1960,15 @@
             color: var(--text-light);
             line-height: 1.5;
             margin-bottom: 6px;
+            /* чтобы карточки имели одинаковую высоту, текст ограничиваем по линиям */
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         @media (max-width: 700px) {
-            .place-photos img { height: 140px; }
+            .place-photos .main-photo { aspect-ratio: 16 / 10; }
             .places-grid { gap: 14px; }
             .place-card { padding: 12px; }
             .place-card h3 { font-size: 1rem; }
@@ -1964,5 +1977,5 @@
 
         @media (max-width: 420px) {
             .place-photos { flex-direction: column; }
-            .place-photos img { height: 180px; }
+            .place-photos .main-photo { aspect-ratio: 16 / 9; }
         }
