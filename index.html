@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Санаторий Дуздаг — Лечебный центр в соляной пещере</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="./js/translations.js"></script>
+    <script src="./js/main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="language-modal active" id="languageModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Выберите язык / Select language / Dil seçin</h3>
+            <p id="modalSubtitle">Пожалуйста, выберите предпочитаемый язык для сайта</p>
+
+            <div class="language-grid" id="languageOptions">
+            </div>
+
+            <button class="btn" id="confirmLanguage">Продолжить / Continue / Davam et</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-mountain"></i> <span id="logoText">Дуздаг</span>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li class="mobile-panel">
+                    <div class="mobile-panel-inner">
+                        <button class="theme-toggle mobile" id="themeToggleMobile" title="Переключить тему">
+                            <i class="fas fa-moon"></i>
+                        </button>
+
+                        <div class="language-switcher mobile">
+                            <select id="languageSelectMobile">
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#home" id="navHome">Главная</a></li>
+                <li><a href="#about" id="navAbout">О санатории</a></li>
+                <li><a href="#features" id="navFeatures">Особенности</a></li>
+                <li><a href="#gallery" id="navGallery">Галерея</a></li>
+                <li><a href="#testimonials" id="navTestimonials">Отзывы</a></li>
+                <li><a href="#contact" id="navContact">Контакты</a></li>
+            </ul>
+
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle" title="Переключить тему">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <div class="language-switcher">
+                    <select id="languageSelect">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 id="heroTitle">Санаторий Дуздаг — Лечебный центр в соляной пещере</h1>
+            <p id="heroText">Уникальный оздоровительный комплекс внутри древней соляной шахты. Эффективное лечение
+                заболеваний дыхательных путей в естественной соляной среде.</p>
+            <a href="#contact" class="btn" id="heroButton">Связаться с нами</a>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 id="aboutTitle">О санатории Дуздаг</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p id="aboutText1">🧂 <strong>Дуздаг</strong> — это огромная соляная гора и лечебно-оздоровительный
+                        комплекс, созданный внутри старой соляной шахты, расположенной примерно в 12 км от Нахичевани.
+                        Считается одним из лучших мест в регионе для лечения заболеваний дыхательных путей.</p>
+
+                    <p id="aboutText2">🕰 <strong id="historyTitle">История</strong><br>
+                        <span id="historyText">Месторождение соли известно с древних времён. Соль добывали ещё 2500–3000
+                            лет назад, что подтверждается археологическими находками. Позже шахту перестали использовать
+                            для добычи и создали оздоровительный центр благодаря уникальному микроклимату.</span>
+                    </p>
+
+                    <p id="aboutText3">🚗 <strong id="locationTitle">Где находится</strong><br>
+                        <span id="locationText">12 км северо-восточнее города Нахичевань. Дорога асфальтирована, легко
+                            доехать на машине.</span>
+                    </p>
+                </div>
+                <div class="about-image">
+                    <video id="aboutVideo" poster="./content/1.jpg" muted autoplay loop playsinline controls>
+                        <source src="./content/video.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="nahchivan-section" id="nahchivan">
+        <div class="container">
+            <h2 id="nahchivanTitle">О Нахчиване</h2>
+            <div class="nahchivan-content">
+                <p id="nahchivanText">Нахичевань — автономная территория Азербайджана с богатой историей, уникальной природой и гостеприимными людьми. Регион известен своими культурными памятниками и живописными ландшафтами.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 id="featuresTitle">Особенности и лечение</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <h3 id="feature1Title">Что лечат в Дуздаге</h3>
+                    <p id="feature1Text">Бронхиальная астма, хронический бронхит, аллергический ринит, ХОБЛ,
+                        поствирусные проблемы дыхания, храп, постоянная заложенность носа.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-temperature-low"></i>
+                    </div>
+                    <h3 id="feature2Title">Климат пещеры</h3>
+                    <p id="feature2Text">Температура: 18–20°C, влажность: 60–70%. Запахов йода, воздух очень лёгкий.
+                        Постоянная циркуляция без сквозняков.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-procedures"></i>
+                    </div>
+                    <h3 id="feature3Title">Как проходит лечение</h3>
+                    <p id="feature3Text">Осмотр врача, программа на 7–10 дней, ежедневные сеансы по 6-8 часов в пещере.
+                        Эффект достигается после 7–10 сеансов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2 id="galleryTitle">Галерея</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="./content/1.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="./content/1.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="./content/1.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="./content/1.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="./content/1.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="./content/1.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="./content/1.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="./content/1.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2 id="testimonialsTitle">Отзывы пациентов</h2>
+
+            <div class="reviews-slider" id="reviewsSlider">
+                <button class="slider-nav prev" id="prevReview" aria-label="Предыдущий отзыв">&#10094;</button>
+
+                <div class="slides-viewport">
+                    <div id="reviewsContainer" class="slides-track">
+                    </div>
+                </div>
+
+                <button class="slider-nav next" id="nextReview" aria-label="Следующий отзыв">&#10095;</button>
+
+                <div class="slider-controls-mobile" id="reviewsMobileControls" aria-hidden="true">
+                    <button class="slider-nav prev mobile" id="prevReviewMobile" aria-label="Предыдущий отзыв">&#10094;</button>
+                    <button class="slider-nav next mobile" id="nextReviewMobile" aria-label="Следующий отзыв">&#10095;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 id="contactTitle">Свяжитесь с нами</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 id="contactInfoTitle">Контактная информация</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong id="addressLabel">Адрес:</strong> <span
+                            id="addressText">12 км северо-восточнее г. Нахичевань, Азербайджан</span></p>
+                    <p><i class="fas fa-phone"></i> <strong id="phoneLabel">Телефон:</strong> +994 XX XXX XX XX</p>
+                    <p><i class="fas fa-envelope"></i> <strong id="emailLabel">Email:</strong> info@duzdag-sanatorium.az
+                    </p>
+                    <p><i class="fas fa-clock"></i> <strong id="hoursLabel">Режим работы:</strong> <span
+                            id="hoursText">Ежедневно с 8:00 до 20:00</span></p>
+
+                    <h3 style="margin-top: 30px;" id="factsTitle">Интересные факты</h3>
+                    <p id="factsText">Пещера считается одной из самых эффективных соляных клиник в регионе Кавказа.
+                        Здесь ежегодно проходит тысячи пациентов с тяжёлой астмой. Внутри царит полная тишина — лечат не
+                        только лёгкие, но и нервную систему.</p>
+                </div>
+
+                <div class="contact-form">
+                    <h3 id="formTitle">Отправить сообщение</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" id="nameLabel">Ваше имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" id="emailFormLabel">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" id="phoneFormLabel">Телефон</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" id="messageLabel">Сообщение</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn" id="submitButton">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 id="footerAboutTitle">Санаторий Дуздаг</h3>
+                    <p id="footerAboutText">Уникальный лечебный центр в соляной пещере, эффективно помогающий при
+                        заболеваниях дыхательных путей.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 id="footerLinksTitle">Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" id="footerHome">Главная</a></li>
+                        <li><a href="#about" id="footerAbout">О санатории</a></li>
+                        <li><a href="#features" id="footerFeatures">Особенности</a></li>
+                        <li><a href="#gallery" id="footerGallery">Галерея</a></li>
+                        <li><a href="#testimonials" id="footerTestimonials">Отзывы</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 id="footerContactTitle">Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> <span id="footerAddress">Нахичевань,
+                                Азербайджан</span></li>
+                        <li><i class="fas fa-phone"></i> +994 XX XXX XX XX</li>
+                        <li><i class="fas fa-envelope"></i> info@duzdag-sanatorium.az</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
