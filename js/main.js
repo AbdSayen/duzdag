@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initReviews();
     initMobileMenu();
     initForm();
+    initPlacePhotos();
     checkFirstVisit();
 });
 
@@ -667,6 +668,55 @@ function initForm() {
             console.error('EmailJS send error', err);
             const details = (err && (err.text || err.message || err.status)) ? (err.text || err.message || JSON.stringify(err)) : null;
             alert(details ? `Ошибка отправки: ${details}` : getTranslation('formError'));
+        }
+    });
+}
+
+/* Преобразуем .place-photos: первая фотография — основная, остальные — миниатюры. */
+function initPlacePhotos() {
+    document.querySelectorAll('.place-photos').forEach(container => {
+        try {
+            const imgs = Array.from(container.querySelectorAll('img'));
+            if (imgs.length === 0) return;
+
+            // Создаём главный элемент
+            const mainImg = document.createElement('img');
+            mainImg.className = 'main-photo';
+            mainImg.src = imgs[0].src || '';
+            mainImg.alt = imgs[0].alt || '';
+
+            // Создаём контейнер миниатюр
+            const thumbs = document.createElement('div');
+            thumbs.className = 'thumbs';
+
+            imgs.slice(1).forEach((img, i) => {
+                const t = document.createElement('img');
+                t.className = 'thumb';
+                t.src = img.src || '';
+                t.alt = img.alt || '';
+                // при клике меняем главный источник и отмечаем выбранную миниатюру
+                t.addEventListener('click', () => {
+                    const prev = mainImg.src;
+                    mainImg.src = t.src;
+                    // помимо замены, пометим выбранную
+                    thumbs.querySelectorAll('img').forEach(x => x.classList.remove('selected'));
+                    t.classList.add('selected');
+                    // сохраним превью как миниатюру (если нужно сохранять порядок)
+                    t.src = prev;
+                });
+                thumbs.appendChild(t);
+            });
+
+            // Очистим контейнер и вставим главный + миниатюры
+            container.innerHTML = '';
+            container.appendChild(mainImg);
+            if (thumbs.children.length > 0) container.appendChild(thumbs);
+
+            // выделим первую миниатюру, если она есть
+            const firstThumb = thumbs.querySelector('img');
+            if (firstThumb) firstThumb.classList.add('selected');
+        } catch (e) {
+            console.warn('initPlacePhotos error', e);
         }
     });
 }

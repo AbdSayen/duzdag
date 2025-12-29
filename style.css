@@ -1872,3 +1872,97 @@
                 --gradient: linear-gradient(135deg, #4895ef 0%, #b5179e 100%);
             }
         }
+
+        /* Стили для раздела Нахчивань: адаптивная сетка мест и карточки */
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            margin-top: 30px;
+            align-items: start;
+        }
+
+        .place-card {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.04);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Новая раскладка: одна крупная фотография + полоска миниатюр */
+        .place-photos {
+            display: block;
+            width: 100%;
+        }
+
+        .place-photos .main-photo {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .place-photos .thumbs {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 4px;
+        }
+
+        .place-photos .thumbs img {
+            width: 90px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex: 0 0 auto;
+            cursor: pointer;
+            opacity: 0.95;
+            border: 2px solid transparent;
+            transition: transform 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+        }
+
+        .place-photos .thumbs img:active,
+        .place-photos .thumbs img:hover {
+            transform: translateY(-3px);
+            opacity: 1;
+        }
+
+        .place-photos .thumbs img.selected {
+            border-color: var(--primary-color);
+            box-shadow: 0 6px 18px rgba(67,97,238,0.12);
+        }
+
+        .place-card h3 {
+            font-size: 1.05rem;
+            margin: 6px 0 4px;
+            color: var(--primary-color);
+        }
+
+        .place-card p {
+            font-size: 0.98rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 700px) {
+            .place-photos img { height: 140px; }
+            .places-grid { gap: 14px; }
+            .place-card { padding: 12px; }
+            .place-card h3 { font-size: 1rem; }
+            .place-card p { font-size: 0.95rem; }
+        }
+
+        @media (max-width: 420px) {
+            .place-photos { flex-direction: column; }
+            .place-photos img { height: 180px; }
+        }
