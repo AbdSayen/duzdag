@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
     <title>Санаторий Дуздаг — Лечебный центр в соляной пещере</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
     <script src="./js/translations.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" crossorigin="anonymous"></script>
     <script src="./js/main.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -154,35 +156,51 @@
             <h2 id="galleryTitle">Галерея</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="./content/1.jpg"
+                    <img src="content/duzdag/photo_1_2025-12-30_00-13-37.jpg"
                         alt="Интерьер соляной пещеры" id="galleryImage1Alt">
                 </div>
                 <div class="gallery-item">
-                    <img src="./content/1.jpg"
+                    <img src="content/duzdag/photo_2_2025-12-30_00-13-37.jpg"
                         alt="Интерьер соляной пещеры" id="galleryImage1Alt">
                 </div>
                 <div class="gallery-item">
-                    <img src="./content/1.jpg"
+                    <img src="content/duzdag/photo_3_2025-12-30_00-13-37.jpg"
                         alt="Интерьер соляной пещеры" id="galleryImage1Alt">
                 </div>
                 <div class="gallery-item">
-                    <img src="./content/1.jpg"
+                    <img src="content/duzdag/photo_4_2025-12-30_00-13-37.jpg"
                         alt="Интерьер соляной пещеры" id="galleryImage1Alt">
                 </div>
                 <div class="gallery-item">
-                    <img src="./content/1.jpg"
+                    <img src="content/duzdag/photo_5_2025-12-30_00-13-37.jpg"
                         alt="Интерьер соляной пещеры" id="galleryImage1Alt">
                 </div>
                 <div class="gallery-item">
-                    <img src="./content/1.jpg"
+                    <img src="content/duzdag/photo_6_2025-12-30_00-13-37.jpg"
                         alt="Интерьер соляной пещеры" id="galleryImage1Alt">
                 </div>
                 <div class="gallery-item">
-                    <img src="./content/1.jpg"
+                    <img src="content/duzdag/photo_7_2025-12-30_00-13-37.jpg"
                         alt="Интерьер соляной пещеры" id="galleryImage1Alt">
                 </div>
                 <div class="gallery-item">
-                    <img src="./content/1.jpg"
+                    <img src="content/duzdag/photo_8_2025-12-30_00-13-37.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="content/duzdag/photo_9_2025-12-30_00-13-37.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="content/duzdag/photo_10_2025-12-30_00-13-37.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="content/duzdag/photo_11_2025-12-30_00-13-37.jpg"
+                        alt="Интерьер соляной пещеры" id="galleryImage1Alt">
+                </div>
+                <div class="gallery-item">
+                    <img src="content/duzdag/photo_12_2025-12-30_00-13-37.jpg"
                         alt="Интерьер соляной пещеры" id="galleryImage1Alt">
                 </div>
             </div>
@@ -219,7 +237,7 @@
                     <h3 id="contactInfoTitle">Контактная информация</h3>
                     <p><i class="fas fa-map-marker-alt"></i> <strong id="addressLabel">Адрес:</strong> <span
                             id="addressText">12 км северо-восточнее г. Нахичевань, Азербайджан</span></p>
-                    <p><i class="fas fa-phone"></i> <strong id="phoneLabel">Телефон:</strong> +994 XX XXX XX XX</p>
+                    <p><i class="fas fa-phone"></i> <strong id="phoneLabel">Телефон:</strong> +994 60 505 25 14</p>
                     <p><i class="fas fa-envelope"></i> <strong id="emailLabel">Email:</strong> info@duzdag-sanatorium.az
                     </p>
                     <p><i class="fas fa-clock"></i> <strong id="hoursLabel">Режим работы:</strong> <span
@@ -233,7 +251,7 @@
 
                 <div class="contact-form">
                     <h3 id="formTitle">Отправить сообщение</h3>
-                    <form id="contactForm">
+                    <form id="contactForm" data-service="duzdag" data-template="template_f0d7j1i">
                         <div class="form-group">
                             <label for="name" id="nameLabel">Ваше имя</label>
                             <input type="text" id="name" name="name" required>
@@ -286,7 +304,7 @@
                     <ul class="footer-links">
                         <li><i class="fas fa-map-marker-alt"></i> <span id="footerAddress">Нахичевань,
                                 Азербайджан</span></li>
-                        <li><i class="fas fa-phone"></i> +994 XX XXX XX XX</li>
+                        <li><i class="fas fa-phone"></i> +994 60 505 25 14</li>
                         <li><i class="fas fa-envelope"></i> info@duzdag-sanatorium.az</li>
                     </ul>
                 </div>

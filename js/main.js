@@ -41,10 +41,16 @@ function initLanguageSelection() {
         const optionElement = document.createElement('div');
         optionElement.className = 'language-option';
         optionElement.setAttribute('data-lang', langCode);
-        optionElement.innerHTML = `
-                    <div class="language-flag">${lang.flag}</div>
-                    <div>${lang.languageName}</div>
-                `;
+
+        const flagDiv = document.createElement('div');
+        flagDiv.className = 'language-flag';
+        flagDiv.textContent = lang.flag || '';
+
+        const nameDiv = document.createElement('div');
+        nameDiv.textContent = lang.languageName || langCode;
+
+        optionElement.appendChild(flagDiv);
+        optionElement.appendChild(nameDiv);
 
         optionElement.addEventListener('click', function () {
             document.querySelectorAll('.language-option').forEach(opt => {
@@ -55,7 +61,7 @@ function initLanguageSelection() {
 
             currentLanguage = langCode;
 
-            languageSelect.value = langCode;
+            if (languageSelect) languageSelect.value = langCode;
         });
 
         languageOptions.appendChild(optionElement);
@@ -92,6 +98,17 @@ function initLanguageSelection() {
     }
 }
 
+function sanitizeAllowStrong(str) {
+    if (!str) return '';
+    const escaped = escapeHtml(str);
+    return escaped.replace(/&lt;strong&gt;/g, '<strong>').replace(/&lt;\/strong&gt;/g, '</strong>');
+}
+
+function stripTags(input) {
+    if (!input) return '';
+    return input.replace(/<[^>]*>/g, '').trim();
+}
+
 function changeLanguage(langCode) {
     currentLanguage = langCode;
     const lang = translations[langCode];
@@ -99,10 +116,10 @@ function changeLanguage(langCode) {
     for (const key in lang) {
         const element = document.getElementById(key);
         if (element) {
-            if (key.includes('Text') && lang[key].includes('<strong>')) {
-                element.innerHTML = lang[key];
+            if (key.includes('Text') && /<\s*strong\b/i.test(lang[key] || '')) {
+                element.innerHTML = sanitizeAllowStrong(lang[key]);
             } else {
-                element.textContent = lang[key];
+                element.textContent = lang[key] || '';
             }
         }
     }
@@ -228,13 +245,27 @@ function storeReviews(list) {
 
 function defaultReviews() {
     return [
-        { name: 'Сергей Иванов', rating: 5, text: 'После 10 дней лечения в Дуздаге моя астма отступила. Дышу легко, почти забыл про ингалятор. Удивительное место с невероятной энергетикой!', date: '15 марта 2023' },
-        { name: 'Елена Петрова', rating: 4, text: 'Приезжаю сюда уже третий год подряд. После курса лечение эффект держится почти год. Чистейший воздух, тишина и покой - лучшее лекарство от городского стресса.', date: '2 февраля 2023' },
-        { name: 'Елена Петрова', rating: 4, text: 'Приезжаю сюда уже третий год подряд. После курса лечение эффект держится почти год. Чистейший воздух, тишина и покой - лучшее лекарство от городского стресса.', date: '2 февраля 2023' },
-        { name: 'Елена Петрова', rating: 4, text: 'Приезжаю сюда уже третий год подряд. После курса лечение эффект держится почти год. Чистейший воздух, тишина и покой - лучшее лекарство от городского стресса.', date: '2 февраля 2023' },
-        { name: 'Елена Петрова', rating: 4, text: 'Приезжаю сюда уже третий год подряд. После курса лечение эффект держится почти год. Чистейший воздух, тишина и покой - лучшее лекарство от городского стресса.', date: '2 февраля 2023' },
-        { name: 'Елена Петрова', rating: 4, text: 'Приезжаю сюда уже третий год подряд. После курса лечение эффект держится почти год. Чистейший воздух, тишина и покой - лучшее лекарство от городского стресса.', date: '2 февраля 2023' },
-        { name: 'Алиева Марина', rating: 5, text: 'У моего сына был хронический бронхит, постоянные простуды. После лечения в Дуздаге он стал гораздо меньше болеть, укрепился иммунитет. Очень благодарны врачам центра!', date: '10 января 2023' }
+        { name: 'Али Мамедов', rating: 5, text: 'После курса в Дуздаге дыхание стало значительно легче: сократилось число приступов, снизилась потребность в ингаляторе при нагрузках. Врачи дали понятный план реабилитации и объяснили, какие домашние упражнения поддержат эффект.', date: '2025-06-12' },
+        { name: 'Нармин Гасымова', rating: 5, text: 'Чистый минеральный воздух и индивидуальные процедуры помогли улучшить сон и восстановить энергию. Особенно понравился внимательный персонал и постепенный план лечения.', date: '2024-11-03' },
+        { name: 'Эльчин Ахмедов', rating: 4, text: 'Исчезла постоянная усталость и улучшилась переносимость физической нагрузки. После консультации с врачом я получил набор процедур и рекомендации по домашней поддержке здоровья.', date: '2023-09-21' },
+        { name: 'Фарид Рзаев', rating: 5, text: 'Внимательное обследование, подбор процедур по состоянию и постоянный контроль результатов — это то, что выделяет центр. Результат заметен: дыхание ровнее, стало проще заниматься спортом.', date: '2022-07-18' },
+        { name: 'Кямран Гусейнзаде', rating: 4, text: 'Климат и программа процедур реально помогают закрепить результат на месяцы — уехал с инструкциями по поддержке и чувством, что получил инструменты для долгосрочного улучшения.', date: '2021-05-30' },
+        { name: 'Севиндж Алиева', rating: 5, text: 'Приехала с хроническим кашлем, через несколько процедур кашель значительно уменьшился, а общее состояние стало спокойнее. Для семьи это выгодное сочетание лечения и отдыха.', date: '2020-12-02' },
+        { name: 'Мехмет Османов', rating: 4, text: 'Спокойное место, качественная медицинская база и грамотные специалисты — заметил прогресс в дыхательной функции и снизил частоту обострений.', date: '2019-08-14' },
+        { name: 'Гиви Кавтарадзе', rating: 5, text: 'Курс помог восстановиться после длительной болезни: улучшилась выносливость, вернулось нормальное дыхание при прогулках и подъёмах по лестнице.', date: '2025-01-06' },
+        { name: 'Зураб Чхеидзе', rating: 4, text: 'Душевная атмосфера и комплексные процедуры — ингаляции, дыхательная гимнастика и климатотерапия дали устойчивый эффект.', date: '2024-03-27' },
+        { name: 'Арсен Бараташвили', rating: 5, text: 'Через месяц стал реже ощущать одышку при нагрузках. Отдельно отмечу консультации диетолога и физиотерапевта — это помогло закрепить результат.', date: '2023-10-10' },
+        { name: 'Аслан Хаджиев', rating: 5, text: 'Приехали с ребёнком — после курса количество простуд значительно уменьшилось, повысился аппетит и общая активность.', date: '2022-02-11' },
+        { name: 'Лейла Гаджиева', rating: 5, text: 'Эффект превзошёл ожидания: нормализовался сон, исчезла постоянная усталость, а самочувствие стало заметно лучше в повседневной жизни.', date: '2021-11-05' },
+        { name: 'Ибрагим Мирзоев', rating: 4, text: 'Удобное расположение, продуманная программа процедур и регулярный контроль со стороны врачей — результат на лицо: реже простужаюсь и легче переношу физические нагрузки.', date: '2020-06-22' },
+        { name: 'Рамазан Ахмедов', rating: 5, text: 'Понравился комплексный подход: диагностика, физиотерапия и климатотерапия. После курса улучшилась выносливость и снизилась потребность в постоянных лекарствах.', date: '2019-09-01' },
+        { name: 'Диана Погосян', rating: 4, text: 'После процедур улучшился сон и снизился уровень тревожности, организм стал восстанавливаться быстрее. Замечательная команда и внимательное отношение.', date: '2025-04-19' },
+        { name: 'Мадина Курбанова', rating: 5, text: 'Проходили лечение всей семьёй — детям особенно помогли дыхательные упражнения и климат. Уехали с практическими рекомендациями для поддержания результата.', date: '2024-08-08' },
+        { name: 'Рашид Гулиев', rating: 5, text: 'Хорошо организованное наблюдение и последовательная программа процедур — снизил приём симптоматических препаратов и стал реже обращаться к врачу.', date: '2023-12-30' },
+        { name: 'Соса Чантурия', rating: 4, text: 'Сбалансированная программа восстановления, понятные рекомендации и комфортные условия проживания — рекомендую тем, кто ищет длительный эффект.', date: '2022-04-15' },
+        { name: 'Эльза Набиева', rating: 5, text: 'Дети перестали часто болеть, улучшился иммунитет и сон. Особенно полезными оказались индивидуальные сеансы и групповые упражнения.', date: '2021-03-09' },
+        { name: 'Теймур Мамедов', rating: 4, text: 'Уже через неделю почувствовал разницу: дыхание ровнее, стал быстрее восстанавливаться после прогулок. Программа сбалансированная и разумно дозирована.', date: '2020-10-26' },
+        { name: 'Инна Петрикова', rating: 5, text: 'Отношение персонала и эффективность процедур превзошли ожидания. Возьмёте домой не только здоровье, но и знания, как его поддерживать.', date: '2019-05-17' }
     ];
 }
 
@@ -253,20 +284,56 @@ function renderReviews() {
 
         const photoHtml = review.photo ? `<img class="review-photo" src="${review.photo}" alt="photo" />` : '';
 
-        card.innerHTML = `
-            <div class="review-header">
-                <div class="review-avatar">${(review.name && review.name[0]) || 'U'}</div>
-                <div class="review-meta">
-                    <strong class="review-name">${escapeHtml(review.name)}</strong>
-                    <div class="review-rating">${ratingStars}</div>
-                </div>
-            </div>
-            <div class="review-body">
-                <p class="review-text">${escapeHtml(review.text)}</p>
-                ${photoHtml}
-                <div class="review-date">${escapeHtml(review.date || '')}</div>
-            </div>
-        `;
+        // Build review card with safe DOM operations
+        const header = document.createElement('div');
+        header.className = 'review-header';
+
+        const avatar = document.createElement('div');
+        avatar.className = 'review-avatar';
+        avatar.textContent = (review.name && review.name[0]) || 'U';
+
+        const meta = document.createElement('div');
+        meta.className = 'review-meta';
+
+        const nameEl = document.createElement('strong');
+        nameEl.className = 'review-name';
+        nameEl.textContent = escapeHtml(review.name);
+
+        const ratingEl = document.createElement('div');
+        ratingEl.className = 'review-rating';
+        ratingEl.innerHTML = ratingStars;
+
+        meta.appendChild(nameEl);
+        meta.appendChild(ratingEl);
+
+        header.appendChild(avatar);
+        header.appendChild(meta);
+
+        const body = document.createElement('div');
+        body.className = 'review-body';
+
+        const textP = document.createElement('p');
+        textP.className = 'review-text';
+        textP.textContent = escapeHtml(review.text);
+
+        body.appendChild(textP);
+
+        if (review.photo) {
+            const img = document.createElement('img');
+            img.className = 'review-photo';
+            img.src = review.photo;
+            img.alt = 'photo';
+            body.appendChild(img);
+        }
+
+        const dateDiv = document.createElement('div');
+        dateDiv.className = 'review-date';
+        dateDiv.textContent = escapeHtml(review.date || '');
+
+        body.appendChild(dateDiv);
+
+        card.appendChild(header);
+        card.appendChild(body);
 
         container.appendChild(card);
     });
@@ -546,20 +613,61 @@ function initMobileMenu() {
 function initForm() {
     const contactForm = document.getElementById('contactForm');
 
-    contactForm.addEventListener('submit', function (e) {
+    if (!contactForm) return;
+
+    // Initialize EmailJS with provided project id (public key)
+    try {
+        if (window.emailjs && typeof window.emailjs.init === 'function') {
+            window.emailjs.init('7dhI9DXu-K4Q0gwQ6');
+        }
+    } catch (err) {
+        console.warn('EmailJS init failed', err);
+    }
+
+    contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-
-        if (!name || !email || !message) {
-            alert(getTranslation('formError'));
+        // Use built-in HTML5 validation so browser shows correct field messages
+        if (!contactForm.checkValidity()) {
+            contactForm.reportValidity();
             return;
         }
 
-        alert(getTranslation('formSuccess'));
-        contactForm.reset();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone') ? document.getElementById('phone').value.trim() : '';
+        const message = document.getElementById('message').value.trim();
+
+        const serviceId = contactForm.dataset.service || 'duzdag';
+        const templateId = contactForm.dataset.template || 'template_f0d7j1i';
+
+        if (serviceId === 'service_xxx') {
+            alert('Пожалуйста, замените атрибут data-service в форме на ваш EmailJS Service ID в index.html.');
+            return;
+        }
+
+        const templateParams = {
+            from_name: stripTags(name),
+            from_email: stripTags(email),
+            from_phone: stripTags(phone),
+            message: stripTags(message)
+        };
+
+        try {
+            if (!window.emailjs || typeof window.emailjs.send !== 'function') {
+                alert('EmailJS SDK не загружен. Убедитесь, что подключили CDN email.min.js в index.html.');
+                console.error('EmailJS SDK not found (window.emailjs is undefined)');
+                return;
+            }
+
+            await window.emailjs.send(serviceId, templateId, templateParams);
+            alert(getTranslation('formSuccess'));
+            contactForm.reset();
+        } catch (err) {
+            console.error('EmailJS send error', err);
+            const details = (err && (err.text || err.message || err.status)) ? (err.text || err.message || JSON.stringify(err)) : null;
+            alert(details ? `Ошибка отправки: ${details}` : getTranslation('formError'));
+        }
     });
 }
 
